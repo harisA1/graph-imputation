@@ -1,0 +1,6 @@
+# Default config for this version. Fill in when implementing.
+dataset: null
+missing:
+  mechanism: null   # e.g. uniform_node_attr, structural_node_attr, edges
+  rate: null
+seeds: [0, 1, 2, 3, 4]

@@ -1,0 +1,29 @@
+# Paper PDFs: private, never commit (copyrighted)
+SELECTED/
+*.pdf
+
+# Data and run outputs
+data/*
+!data/README.md
+runs/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+.claude/

@@ -1,0 +1,5 @@
+# Runs in the existing `haris` conda env on calypso (see docs/compute.md).
+# Already present there: torch==2.7.0 (cu126), numpy, scipy, scikit-learn, pandas, networkx, pyyaml
+# To add when implementation starts (ask Haris first, then pin versions here):
+# torch_geometric
+# POT
