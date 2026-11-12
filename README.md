@@ -1,43 +1,43 @@
 # Graph imputation
 
-Reimplementations of methods for learning and imputation on graphs (and related data) with missing values: missing node attributes, missing structure, incomplete multi-view data, and graph-based tabular imputation.
+A unified benchmark and reimplementation suite for **learning on graphs with missing data**: missing node attributes, incomplete structure, incomplete multi-view data, and graph-based imputation of tabular data.
 
-The aim is one comparable codebase: every paper gets its own directory, shares the same data loaders, masking protocols and metrics, and keeps every version of its implementation so results stay reproducible.
+Published methods in this area are evaluated on different datasets, missingness patterns, splits and metrics, which makes their numbers hard to compare. This repository reimplements them in one codebase, under one evaluation protocol, and reports how each reproduction compares with the original paper.
 
-**Status:** skeleton only. No datasets and no implementations yet. See [`papers/INDEX.md`](papers/INDEX.md) for the 63 papers and their status.
+## Design
 
-## Layout
+- **One directory per paper**, with frozen, side-by-side versions (`v1/`, `v2/`, ...) so every reported number can be regenerated.
+- **One shared library** ([`gimpute/`](gimpute/)) for datasets, seeded missingness masks, metrics and the evaluation runner. Methods plug into a common interface instead of carrying their own pipeline.
+- **One catalogue** ([`papers/papers.csv`](papers/papers.csv)) that drives the tables below and tracks the status of every paper.
+- **Reproduction reports** in [`reports/`](reports/): our numbers against the paper's, with every deviation documented.
 
-| Path | What lives there |
+## Status
+
+The repository structure, paper catalogue and reproduction-suitability assessment are in place; implementations are being added paper by paper, starting with the propagation-based baselines. See [`reports/reproduction-suitability.md`](reports/reproduction-suitability.md) for the assessment and planned order, and [`reports/log.md`](reports/log.md) for progress.
+
+## Papers
+
+63 papers, grouped by problem setting. *Official code* links to the authors' repository where one was found. *Status* refers to the reimplementation in this repository.
+
+<!-- PAPERS:START -->
+<!-- PAPERS:END -->
+
+A sortable version with reproduction tiers is in [`papers/INDEX.md`](papers/INDEX.md).
+
+## Repository layout
+
+| Path | Contents |
 |---|---|
-| [`papers/`](papers/) | One directory per paper (`<firstauthor><year>-<method>`), each with versioned implementations `v1/`, `v2/`, ... |
-| [`papers/papers.csv`](papers/papers.csv) | Machine-readable catalogue: the source of truth for slugs, categories, priority and status |
-| [`papers/_template/`](papers/_template/) | Copy this to start a new paper |
-| [`gimpute/`](gimpute/) | Shared Python package: datasets, missingness masks, metrics, evaluation protocol |
-| [`configs/`](configs/) | Shared experiment configs (datasets, missing rates, seeds) |
-| [`reports/`](reports/) | Human-readable reports: per-paper reproduction reports and cross-paper comparisons |
-| [`docs/`](docs/) | Conventions, compute setup, design notes |
-| [`scripts/`](scripts/) | Utility scripts (scaffolding, index generation) |
-| `data/`, `runs/` | Local only, git-ignored: datasets and raw run outputs |
+| [`papers/`](papers/) | One directory per paper (`<firstauthor><year>-<method>`): paper card, changelog, versioned implementations |
+| [`papers/_template/`](papers/_template/) | Template for a new paper |
+| [`gimpute/`](gimpute/) | Shared library: datasets, missingness masks, metrics, evaluation protocol |
+| [`configs/`](configs/) | Shared experiment definitions (datasets, missing rates, seeds) |
+| [`reports/`](reports/) | Reproduction reports and cross-paper comparisons |
+| [`docs/`](docs/) | Conventions and compute setup |
+| [`scripts/`](scripts/) | Catalogue and scaffolding utilities |
 
-## Paper categories
+Datasets (`data/`) and raw run outputs (`runs/`) are not tracked. Paper PDFs are not distributed here; follow the venue links or the authors' repositories.
 
-| Code | Category |
-|---|---|
-| A | Graphs with missing node attributes (feature imputation / attribute completion) |
-| B | Graphs with incomplete features **and** structure (or weak labels) |
-| C | Incomplete multi-view learning (clustering / classification) |
-| D | General (tabular) data imputation, incl. graph-, OT- and GAN-based |
-| E | Fairness with missing attributes |
+## Contributing
 
-## Where things run
-
-Development happens on Haris's laptop; training runs on the `calypso` GPU server (NVIDIA A40) in `~/graph-imputation` with the `haris` conda environment. See [`docs/compute.md`](docs/compute.md).
-
-## For agents
-
-Start with [`AGENTS.md`](AGENTS.md).
-
-## Note on papers
-
-The paper PDFs are not in this repository. They are kept privately; `papers.csv` records each paper's filename so it can be matched.
+Working conventions (directory layout, versioning rules, status values) are in [`docs/conventions.md`](docs/conventions.md); the compute environment is described in [`docs/compute.md`](docs/compute.md). Automated agents should start with [`AGENTS.md`](AGENTS.md).
