@@ -1,0 +1,5 @@
+# Defaults of the authors' code. The paper tunes alpha and beta per dataset on the validation
+# set (alpha in {0.1..0.9}, beta in {1e-6..1}); v1 uses these fixed values everywhere.
+alpha: 0.9
+beta: 1.0
+num_iterations: 100
