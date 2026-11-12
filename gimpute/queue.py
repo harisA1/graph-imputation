@@ -2,10 +2,13 @@
 
     python -m gimpute.queue add --paper rossi2020-fp --version v1       # arguments of gimpute.run
     python -m gimpute.queue list
-    nohup python -m gimpute.queue work > runs/queue/worker.log 2>&1 &   # one worker; exits when empty
+    nohup python -m gimpute.queue work > runs/queue/worker.log 2>&1 &   # a worker; exits when empty
+    nohup python -m gimpute.queue work 2 > runs/queue/worker2.log 2>&1 & # a second one, in parallel
 
-State lives in runs/queue/ (git-ignored): pending.txt, done.txt, logs/. Only one worker runs
-at a time (file lock). Runs are resumable, so a job that was interrupted can just be added again.
+State lives in runs/queue/ (git-ignored): pending.txt, done.txt, logs/. One worker runs
+per slot (file lock); start workers in several slots to run jobs side by side. The models here
+are small, so several fit on the GPU at once. Runs are resumable, so a job that was interrupted
+can just be added again.
 """
 from __future__ import annotations
 
@@ -48,14 +51,15 @@ def main(argv=None) -> int:
             path = Q / name
             print(f"--- {name}\n{path.read_text(encoding='utf-8') if path.exists() else ''}", end="")
     elif cmd == "work":
-        lock = open(Q / "worker.lock", "w")
+        slot = argv[1] if len(argv) > 1 else "1"
+        lock = open(Q / f"worker-{slot}.lock", "w")
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
-            print("a worker is already running")
+            print(f"a worker is already running in slot {slot}")
             return 1
         while (job := _pop()) is not None:
-            stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+            stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + f"-{slot}"
             print(f"[{stamp}] start: {job}", flush=True)
             with open(Q / "logs" / f"{stamp}.log", "w", encoding="utf-8") as log:
                 code = subprocess.run([sys.executable, "-m", "gimpute.run", *shlex.split(job)], cwd=ROOT, stdout=log, stderr=subprocess.STDOUT).returncode
