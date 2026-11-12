@@ -41,6 +41,7 @@ class Method:
 
     def __init__(self, config: Optional[dict] = None):
         self.config = config or {}
+        self.protocol = {}  # the dict from configs/protocol.yaml, set by the runner
 
     def run(self, data: GraphData, observed: torch.Tensor, seed: int) -> Output:
         raise NotImplementedError

@@ -78,6 +78,7 @@ def main(argv=None) -> int:
     cfg_path = Path(a.config) if a.config else ROOT / "papers" / a.paper / a.version / "configs" / "default.yaml"
     config = (yaml.safe_load(cfg_path.read_text(encoding="utf-8")) or {}) if cfg_path.exists() else {}
     method = load_method(a.paper, a.version)(config)
+    method.protocol = proto
 
     out = results_path(a.paper, a.version)
     out.parent.mkdir(parents=True, exist_ok=True)

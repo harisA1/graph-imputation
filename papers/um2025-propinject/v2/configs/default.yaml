@@ -1,0 +1,9 @@
+# The "light search" of the paper (appendix C.7): alpha = beta, five values each for alpha and
+# gamma (25 combinations). The paper reports that it does not lose accuracy against the full
+# 125-combination search.
+num_iterations: 100
+grid:
+  alpha: [0.1, 0.3, 0.5, 0.7, 0.9]
+  gamma: [0.1, 0.3, 0.5, 0.7, 0.9]
+tie:
+  beta: alpha
