@@ -1,0 +1,6 @@
+# Defaults of the authors' code. The paper tunes these per dataset on the validation set;
+# v1 uses the fixed defaults everywhere.
+alpha: 0.9
+beta: 0.9
+gamma: 0.7
+num_iterations: 100

@@ -9,7 +9,8 @@ Two stages, no trainable parameters:
    (row-normalised), and known entries are reset after every step. Because the factor that
    depends on i cancels in the row normalisation, one step is
        X <- (A+I)(P * X) / (A+I)P,   P = alpha^S,
-   which lets all channels be processed at once instead of one channel at a time.
+   which lets all channels be processed at once instead of one channel at a time
+   (gimpute/propagation.py).
 2. Node-wise inter-channel propagation. With R the correlation matrix between recovered
    channels (diagonal zero) and m the channel means,
        X <- X + beta * (1 - P) * ((P * (X - m)) R),
@@ -22,39 +23,16 @@ any observed node.
 import torch
 
 from gimpute.methods import Method, Output
-
-
-def distance_to_observed(adj: torch.Tensor, observed: torch.Tensor) -> torch.Tensor:
-    """S[i, d]: hops from node i to the nearest node with channel d observed (multi-source BFS
-    for all channels at once). Unreachable entries keep distance 0, as in the authors' code."""
-    reached = observed.clone()
-    dist = torch.zeros(observed.shape, device=observed.device)
-    step = 0
-    while True:
-        step += 1
-        frontier = (torch.sparse.mm(adj, reached.float()) > 0) & ~reached
-        if not frontier.any():
-            return dist
-        dist[frontier] = step
-        reached |= frontier
+from gimpute.propagation import adjacency_with_self_loops, confidence_diffusion, distance_to_observed
 
 
 class PCFI(Method):
     def run(self, data, observed, seed):
         alpha = float(self.config.get("alpha", 0.9))
         beta = float(self.config.get("beta", 1.0))
-        n = data.num_nodes
-        loops = torch.arange(n, device=data.x.device)
-        ei = torch.cat([data.edge_index, torch.stack([loops, loops])], dim=1)
-        adj = torch.sparse_coo_tensor(ei, torch.ones(ei.shape[1], device=data.x.device), (n, n)).coalesce()
-
+        adj = adjacency_with_self_loops(data.edge_index, data.num_nodes)
         conf = alpha ** distance_to_observed(adj, observed)  # pseudo-confidence P
-        denom = torch.sparse.mm(adj, conf)
-        known = data.x
-        x = known.clone()
-        for _ in range(int(self.config.get("num_iterations", 100))):
-            x = torch.sparse.mm(adj, conf * x) / denom
-            x = torch.where(observed, known, x)
+        x = confidence_diffusion(adj, data.x, observed, conf, int(self.config.get("num_iterations", 100)))
 
         corr = torch.corrcoef(x.T).nan_to_num()
         corr.fill_diagonal_(0)
