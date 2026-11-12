@@ -8,10 +8,10 @@ Generated from `papers.csv` by `scripts/build_index.py`. Do not edit by hand.
 
 | Paper | Method | Venue | Title | Code | Priority | Tier | Status |
 |---|---|---|---|---|---|---|---|
-| [serrano2024-griot](serrano2024-griot/) | GRIOT | ECML PKDD 2024 | Reconstructing the Unseen: GRIOT for Attributed Graph Imputation with Optimal Transport | [RichardSrn/GRIOT](https://github.com/RichardSrn/GRIOT) | 5 | 1 | not-started |
+| [serrano2024-griot](serrano2024-griot/) | GRIOT | ECML PKDD 2024 | Reconstructing the Unseen: GRIOT for Attributed Graph Imputation with Optimal Transport | [RichardSrn/GRIOT](https://github.com/RichardSrn/GRIOT) | 5 | 1 | next |
 | [liu2026-migdiff](liu2026-migdiff/) | MIGDiff | AAAI 2026 | Multi-Attribute Imputations for Attribute-Missing Graphs via Graph Denoising Diffusion Model | [YeLiu-Lab/MIGDiff](https://github.com/YeLiu-Lab/MIGDiff) | 5 | 1 | not-started |
 | [rossi2020-fp](rossi2020-fp/) | FP | LoG 2022 (arXiv 2021) | On the Unreasonable Effectiveness of Feature Propagation in Learning on Graphs with Missing Node Features | [twitter-research/feature-propagation](https://github.com/twitter-research/feature-propagation) | 4 | 1 | reproduced |
-| [chen2022-sat](chen2022-sat/) | SAT | IEEE TPAMI 2022 | Learning on Attribute-Missing Graphs | [xuChenSJTU/SAT-master-online](https://github.com/xuChenSJTU/SAT-master-online) | 4 | 1 | in-progress |
+| [chen2022-sat](chen2022-sat/) | SAT | IEEE TPAMI 2022 | Learning on Attribute-Missing Graphs | [xuChenSJTU/SAT-master-online](https://github.com/xuChenSJTU/SAT-master-online) | 4 | 1 | not-started |
 | [tu2022-itr](tu2022-itr/) | ITR | IJCAI 2022 | Initializing Then Refining: A Simple Graph Attribute Imputation Network | [WxTu/ITR](https://github.com/WxTu/ITR) | 4 | 1 | not-started |
 | [peng2024-mate](peng2024-mate/) | MATE | Information Fusion 2024 | Multi-View Graph Imputation Network | [XinPeng97/MATE](https://github.com/XinPeng97/MATE) | 4 | 1 | not-started |
 | [tu2024-amgc](tu2024-amgc/) | AMGC | AAAI 2024 | Attribute-Missing Graph Clustering Network | [WxTu/AMGC](https://github.com/WxTu/AMGC) | 4 | 1 | not-started |
@@ -19,7 +19,7 @@ Generated from `papers.csv` by `scripts/build_index.py`. Do not edit by hand.
 | [um2025-propinject](um2025-propinject/) | FISF | ICML 2025 | Propagate and Inject: Revisiting Propagation-Based Feature Imputation for Graphs with Partially Observed Features | [daehoum1/fisf](https://github.com/daehoum1/fisf) | 4 | 1 | reproduced |
 | [li2026-attrireboost](li2026-attrireboost/) | AttriReBoost | IEEE journal 2026 (arXiv 2025) | A Gradient-Free Propagation Optimization Method for Cold-Start Mitigation in Attribute-Missing Graphs | [limengran98/ARB](https://github.com/limengran98/ARB) | 4 | 1 | not-started |
 | [qiao2026-fsdcap](qiao2026-fsdcap/) | FSD-CAP | ICLR 2026 | Fractional Subgraph Diffusion with Class-Aware Propagation for Graph Feature Imputation | [ssjcode/FSD-CAP](https://github.com/ssjcode/FSD-CAP) | 4 | 1 | not-started |
-| [song2026-dart](song2026-dart/) | DART | KDD 2026 (to confirm) | Mitigating Structural Overfitting: A Distribution-Aware Missing Feature Imputation via Two-step Reconstruction | [yfsong00/DART](https://github.com/yfsong00/DART) | 4 | 1 | not-started |
+| [song2026-dart](song2026-dart/) | DART | KDD 2026 (to confirm) | Mitigating Structural Overfitting: A Distribution-Aware Missing Feature Imputation via Two-step Reconstruction | [yfsong00/DART](https://github.com/yfsong00/DART) | 4 | 1 | next |
 | [um2023-pcfi](um2023-pcfi/) | PCFI | ICLR 2023 | Confidence-Based Feature Imputation for Graphs with Partially Known Features | [daehoum1/pcfi](https://github.com/daehoum1/pcfi) | 3 | 1 | reproduced |
 | [jiang2021-pagnn](jiang2021-pagnn/) | PaGNN | arXiv 2021 | Incomplete Graph Representation and Learning via Partial Graph Neural Networks | [yaya1015/PaGCN](https://github.com/yaya1015/PaGCN) | 4 | 2 | not-started |
 | [zhang2024-pagc](zhang2024-pagc/) | PaGC | IEEE TAI 2024 | Incomplete Graph Learning via Partial Graph Convolutional Network | [yaya1015/PaGCN](https://github.com/yaya1015/PaGCN) | 4 | 2 | not-started |
@@ -81,7 +81,7 @@ Generated from `papers.csv` by `scripts/build_index.py`. Do not edit by hand.
 | [muzellec2020-ot](muzellec2020-ot/) | OT | ICML 2020 | Missing Data Imputation using Optimal Transport | [BorisMuzellec/MissingDataOT](https://github.com/BorisMuzellec/MissingDataOT) | 4 | 1 | not-started |
 | [spinelli2020-ginn](spinelli2020-ginn/) | GINN | Neural Networks 2020 | Missing Data Imputation with Adversarially-Trained Graph Convolutional Networks | [spindro/GINN](https://github.com/spindro/GINN) | 4 | 1 | not-started |
 | [you2020-grape](you2020-grape/) | GRAPE | NeurIPS 2020 | Handling Missing Data with Graph Representation Learning | [maxiaoba/GRAPE](https://github.com/maxiaoba/GRAPE) | 4 | 1 | not-started |
-| [zhang2024-dirichlet](zhang2024-dirichlet/) | - | KDD 2024 (to confirm) | Data Imputation from the Perspective of Graph Dirichlet Energy | [liguanlue/GLPN](https://github.com/liguanlue/GLPN) | 4 | 1 | not-started |
+| [zhang2024-dirichlet](zhang2024-dirichlet/) | GLPN | KDD 2024 (to confirm) | Data Imputation from the Perspective of Graph Dirichlet Energy | [liguanlue/GLPN](https://github.com/liguanlue/GLPN) | 4 | 1 | in-progress |
 | [wang2025-ganimputer](wang2025-ganimputer/) | GANImputer | Neural Computing and Applications 2025 | Generative Adversarial Learning for Missing Data Imputation | [hongyuchen2andrew/GANImputer](https://github.com/hongyuchen2andrew/GANImputer) | 3 | 2 | not-started |
 | [wu2023-gan-imputation](wu2023-gan-imputation/) | - | IEEE ICDE 2023 | Differentiable and Scalable Generative Adversarial Models for Data Imputation | - | 4 | 4 | not-started |
 

@@ -25,9 +25,16 @@ The papers being reimplemented, grouped by problem setting. *Official code* link
 | Method | Paper | Venue | Official code | Status |
 |---|---|---|---|---|
 | [FP](papers/rossi2020-fp/) | On the Unreasonable Effectiveness of Feature Propagation in Learning on Graphs with Missing Node Features | LoG 2022 (arXiv 2021) | [twitter-research/feature-propagation](https://github.com/twitter-research/feature-propagation) | reproduced |
-| [SAT](papers/chen2022-sat/) | Learning on Attribute-Missing Graphs | IEEE TPAMI 2022 | [xuChenSJTU/SAT-master-online](https://github.com/xuChenSJTU/SAT-master-online) | in progress |
 | [PCFI](papers/um2023-pcfi/) | Confidence-Based Feature Imputation for Graphs with Partially Known Features | ICLR 2023 | [daehoum1/pcfi](https://github.com/daehoum1/pcfi) | reproduced |
+| [GRIOT](papers/serrano2024-griot/) | Reconstructing the Unseen: GRIOT for Attributed Graph Imputation with Optimal Transport | ECML PKDD 2024 | [RichardSrn/GRIOT](https://github.com/RichardSrn/GRIOT) | up next |
 | [FISF](papers/um2025-propinject/) | Propagate and Inject: Revisiting Propagation-Based Feature Imputation for Graphs with Partially Observed Features | ICML 2025 | [daehoum1/fisf](https://github.com/daehoum1/fisf) | reproduced |
+| [DART](papers/song2026-dart/) | Mitigating Structural Overfitting: A Distribution-Aware Missing Feature Imputation via Two-step Reconstruction | KDD 2026 (to confirm) | [yfsong00/DART](https://github.com/yfsong00/DART) | up next |
+
+### General data imputation
+
+| Method | Paper | Venue | Official code | Status |
+|---|---|---|---|---|
+| [GLPN](papers/zhang2024-dirichlet/) | Data Imputation from the Perspective of Graph Dirichlet Energy | KDD 2024 (to confirm) | [liguanlue/GLPN](https://github.com/liguanlue/GLPN) | in progress |
 <!-- PAPERS:END -->
 
 Candidate papers for later rounds are tracked in [`papers/INDEX.md`](papers/INDEX.md).
