@@ -15,7 +15,7 @@ MECHANISMS = ("uniform", "structural")
 
 
 def make_mask(num_nodes: int, num_features: int, mechanism: str, rate: float, seed: int) -> torch.Tensor:
-    if not 0.0 <= rate < 1.0:
+    if not 0.0 <= rate < 1.0:  # rate 0 = full features, the reference point
         raise ValueError("rate must be in [0, 1)")
     g = torch.Generator().manual_seed(seed)
     if mechanism == "uniform":

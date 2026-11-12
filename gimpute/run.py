@@ -91,7 +91,7 @@ def main(argv=None) -> int:
             continue
         row = {"paper": a.paper, "version": a.version, "dataset": dataset, "mechanism": mechanism, "rate": rate, "seed": seed}
         try:
-            row.update(evaluate_cell(method, dataset, mechanism, rate, seed, a.device))
+            row.update(evaluate_cell(method, dataset, mechanism, rate, seed, a.device, proto))
         except Exception as e:  # keep going: one failing cell must not lose the rest of a long run
             failures += 1
             print(f"  FAILED {dataset} {mechanism} {rate} seed={seed}: {type(e).__name__}: {e}", file=sys.stderr)

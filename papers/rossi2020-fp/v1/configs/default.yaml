@@ -1,0 +1,2 @@
+# Feature Propagation has one setting. The paper uses 40 iterations for every dataset.
+num_iterations: 40

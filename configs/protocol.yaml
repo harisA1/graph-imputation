@@ -1,7 +1,20 @@
 # The shared evaluation protocol. Every paper is run on this grid unless overridden on the
 # command line (see `python -m gimpute.run --help`). Changing this file changes what the
 # leaderboard compares, so change it deliberately and note it in reports/log.md.
+#
+# The data handling and the downstream classifier follow Rossi et al. (Feature Propagation),
+# the setting most later papers on missing node features reuse: largest connected component,
+# random splits (20 nodes per class for training, 1500 for validation, rest for test), and a
+# 2-layer GCN trained with Adam, no hyper-parameter tuning.
 datasets: [cora, citeseer, pubmed, photo, computers]
+largest_component: true
 mechanisms: [uniform, structural]
 rates: [0.5, 0.9, 0.99]
 seeds: [0, 1, 2, 3, 4]
+downstream:
+  hidden: 64
+  dropout: 0.5
+  lr: 0.005
+  weight_decay: 0.0
+  epochs: 10000
+  patience: 200

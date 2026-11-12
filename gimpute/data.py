@@ -5,6 +5,7 @@ so that the rest of the package works without it. `sbm` is a small synthetic gra
 """
 from __future__ import annotations
 
+import functools
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Callable, Dict
@@ -113,9 +114,33 @@ DATASETS: Dict[str, Callable[[], GraphData]] = {
 }
 
 
-def load_dataset(name: str, split_seed: int = 0) -> GraphData:
-    """Load a dataset and attach a seeded random split (same seed -> same split for every method)."""
+def largest_component(data: GraphData) -> GraphData:
+    """Keep only the largest connected component (the convention of the FP family of papers)."""
+    import numpy as np
+    import scipy.sparse as sp
+    from scipy.sparse.csgraph import connected_components
+
+    n = data.num_nodes
+    row, col = data.edge_index.numpy()
+    _, comp = connected_components(sp.coo_matrix((np.ones(row.size), (row, col)), shape=(n, n)), directed=False)
+    keep = torch.from_numpy(comp == np.bincount(comp).argmax())
+    new_id = torch.full((n,), -1, dtype=torch.long)
+    new_id[keep] = torch.arange(int(keep.sum()))
+    ei = data.edge_index[:, keep[data.edge_index[0]] & keep[data.edge_index[1]]]
+    empty = torch.zeros(int(keep.sum()), dtype=torch.bool)
+    return GraphData(data.name, data.x[keep], new_id[ei], data.y[keep], data.num_classes, empty, empty, empty)
+
+
+@functools.lru_cache(maxsize=4)
+def _load(name: str, lcc: bool) -> GraphData:
     if name not in DATASETS:
         raise KeyError(f"unknown dataset '{name}'; known: {sorted(DATASETS)}")
     data = DATASETS[name]()
+    return largest_component(data) if lcc else data
+
+
+def load_dataset(name: str, split_seed: int = 0, lcc: bool = False) -> GraphData:
+    """Load a dataset (optionally its largest connected component) and attach a seeded random
+    split: same seed -> same split for every method."""
+    data = _load(name, lcc)
     return data.with_split(*random_split(data.y, split_seed))

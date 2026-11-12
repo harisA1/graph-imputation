@@ -20,8 +20,11 @@ from .masking import apply_mask, make_mask
 from .methods import Method
 
 
-def evaluate_cell(method: Method, dataset: str, mechanism: str, rate: float, seed: int, device: str) -> dict:
-    data = load_dataset(dataset, split_seed=seed)
+def evaluate_cell(method: Method, dataset: str, mechanism: str, rate: float, seed: int, device: str,
+                  protocol: dict | None = None) -> dict:
+    """`protocol` is the dict from configs/protocol.yaml (keys used: largest_component, downstream)."""
+    protocol = protocol or {}
+    data = load_dataset(dataset, split_seed=seed, lcc=bool(protocol.get("largest_component", False)))
     observed = make_mask(data.num_nodes, data.x.shape[1], mechanism, rate, seed)
     truth = data.x.to(device)
     observed = observed.to(device)
@@ -45,7 +48,7 @@ def evaluate_cell(method: Method, dataset: str, mechanism: str, rate: float, see
         row["test_acc"] = metrics.accuracy(logits, masked.y, masked.test_mask)
         row["classifier"] = "own"
     elif out.x_hat is not None:
-        row.update(train_gcn(masked, x_hat, seed))
+        row.update(train_gcn(masked, x_hat, seed, **protocol.get("downstream", {})))
         row["classifier"] = "gcn"
     if out.extra:
         row.update(out.extra)

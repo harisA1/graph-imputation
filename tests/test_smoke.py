@@ -16,6 +16,9 @@ from gimpute.methods import load_method
 from gimpute.protocol import evaluate_cell
 
 
+PROTO = {"largest_component": True, "downstream": {"epochs": 300, "patience": 50}}
+
+
 def test_masks():
     a = make_mask(100, 20, "uniform", 0.7, seed=3)
     assert torch.equal(a, make_mask(100, 20, "uniform", 0.7, seed=3)), "masks must be deterministic"
@@ -45,13 +48,15 @@ def test_pipeline():
     res = {}
     for name in ("zero", "mean", "neighbor-mean"):
         method = load_method(f"baseline-{name}", "v1")()
-        res[name] = evaluate_cell(method, "sbm", "uniform", 0.8, seed=0, device="cpu")
+        res[name] = evaluate_cell(method, "sbm", "uniform", 0.8, seed=0, device="cpu", protocol=PROTO)
         assert 0.0 <= res[name]["test_acc"] <= 1.0
     assert res["mean"]["rmse"] < res["zero"]["rmse"], res
     assert res["neighbor-mean"]["rmse"] < res["mean"]["rmse"], res
     assert res["neighbor-mean"]["test_acc"] > 0.5, res
-    s = evaluate_cell(load_method("baseline-neighbor-mean", "v1")(), "sbm", "structural", 0.5, seed=0, device="cpu")
+    s = evaluate_cell(load_method("baseline-neighbor-mean", "v1")(), "sbm", "structural", 0.5, seed=0, device="cpu", protocol=PROTO)
     assert s["rmse"] == s["rmse"]
+    fp = evaluate_cell(load_method("rossi2020-fp", "v1")({"num_iterations": 40}), "sbm", "uniform", 0.8, seed=0, device="cpu", protocol=PROTO)
+    assert fp["rmse"] < res["mean"]["rmse"], (fp, res)
 
 
 if __name__ == "__main__":
