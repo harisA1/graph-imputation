@@ -14,7 +14,8 @@
 
 - Because the folder is owned by `jupyter-haris`, `administrator` has `safe.directory` set for it in its global git config (done 2026-11-12). Verified then: write access works, `import gimpute` works in the `haris` env, and the GPU is visible.
 
-- Disk: the root filesystem was ~98% full (15 GB free) on 2026-11-12. Keep datasets small, clean up `runs/`, and ask before downloading anything large.
+- Disk: the root filesystem (which holds `/home`) had 54 GB free on 2026-11-12, after Haris cleared his caches. Keep datasets small, clean up `runs/`, and ask before downloading anything large.
+- Overflow storage: `/mnt/raw` (14 TB, ~1.5 TB free). Haris says it **frequently drops out**, so use it only for big, re-downloadable data (raw datasets), never as the only copy of results or code. It is owned by `jupyter-administrator`; a writable folder for this project there still has to be set up (ask Haris).
 
 ## Python environment: `haris`
 
