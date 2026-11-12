@@ -36,6 +36,7 @@ Implemented in `gimpute/`; the grid is `configs/protocol.yaml`.
 - Metrics: RMSE/MAE on missing entries; Recall@k and nDCG@k for binary features under structural missingness; node classification accuracy, using the method's own classifier if it has one and otherwise the standard GCN (`gimpute/downstream.py`) on its imputed features.
 - Run a version: `python -m gimpute.run --paper <slug> --version vN` (resumable; one row per cell in `papers/<slug>/vN/results/results.jsonl`, with the git commit). Queue several: `python -m gimpute.queue add ...` then `python -m gimpute.queue work`.
 - `python -m gimpute.report` rebuilds `reports/comparisons/leaderboard.md` from all results.
+- Papers that tune hyper-parameters per dataset get a tuned version built with `gimpute/tuning.py` (selection by validation accuracy of the standard GCN; test nodes are never used). Keep the untuned version as its own `vN` so both are reported.
 - `python tests/test_smoke.py` checks the shared layer on a synthetic graph; run it after changing `gimpute/`.
 
 Paper-specific protocols are allowed **in addition** (as extra code in the version folder), to check that we match the paper's own numbers before comparing under the shared protocol.

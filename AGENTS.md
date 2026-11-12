@@ -8,11 +8,17 @@ Reimplementing ~63 papers on imputation and learning with missing data on graphs
 
 ## Current state (keep this section up to date)
 
-- 2026-11-12: skeleton created; calypso work folder `/home/jupyter-haris/graph-imputation` (a clone of this repo) created by Haris and writable by `administrator` via ACL.
-- 2026-11-12: every paper assessed for reproduction suitability, see [`reports/reproduction-suitability.md`](reports/reproduction-suitability.md) and the `venue` / `code_url` / `open_data` / `repro_tier` columns in `papers.csv`. Official code exists for 35 of 63.
-- 2026-11-12: shared layer written and tested on calypso with the synthetic graph and the three reference baselines (`python tests/test_smoke.py`; runner, resume, queue and leaderboard all exercised). **No paper implemented yet and no real dataset downloaded yet**: real datasets need `torch_geometric`, which is not installed in the `haris` env until Haris agrees.
-- Next: install `torch_geometric`, run the baselines on the protocol grid, then implement **Feature Propagation (`rossi2020-fp`)** as the first paper, followed by PCFI and Propagate-and-Inject, then SAT.
-- The laptop has no Python. Run scripts (`scripts/build_index.py`, tests, experiments) in the calypso clone. `administrator` cannot push from calypso, so copy generated files back to the laptop clone and commit there.
+- Calypso work folder `/home/jupyter-haris/graph-imputation` (a clone of this repo), writable by `administrator` via ACL. `torch_geometric` and `POT` are installed in the `haris` env. Datasets (Cora, CiteSeer, PubMed, Photo, Computers) are in `data/` there.
+- Every paper was assessed for reproduction suitability: [`reports/reproduction-suitability.md`](reports/reproduction-suitability.md), columns `venue` / `code_url` / `open_data` / `repro_tier` in `papers.csv`.
+- Shared layer (`gimpute/`) is complete and in use; the protocol follows the Feature Propagation setting (`configs/protocol.yaml`).
+- **Done:** Feature Propagation `rossi2020-fp/v1` reproduced ([report](reports/rossi2020-fp.md), tag `rossi2020-fp/v1`).
+- **In progress (2026-11-12):** PCFI `um2023-pcfi` and FISF `um2025-propinject`. v1 of both (authors' default hyper-parameters) is run and reported, partially reproducing the papers. v2 of both (validation-tuned through `gimpute/tuning.py`) was queued on calypso at rate 0.995, 10 seeds; when it finishes: copy `papers/*/v2/results/results.jsonl` back, run `python -m gimpute.report`, update the two reports and changelogs, set the status in `papers.csv`.
+- **Next:** SAT (`chen2022-sat`), the first trained model and the first to use the Recall@k / nDCG@k profiling metrics. After that, ask Haris which papers to take on.
+- Three reference baselines (zero, mean, neighbour mean) are run on the full grid; results in `reports/baselines/`, comparison in [`reports/comparisons/leaderboard.md`](reports/comparisons/leaderboard.md).
+- The README lists only papers with status other than `not-started`. Haris was asked whether to remove the placeholder folders of unstarted papers from the public repo; no answer yet, so leave them.
+- The laptop has no Python. Run scripts, tests and experiments in the calypso clone. `administrator` cannot push from calypso: copy generated files back to the laptop clone (`ssh ... cat file > file`), commit and push there, then delete the copies on calypso and `git pull`.
+- Several queue workers can run side by side (`python -m gimpute.queue work <slot>`); jobs here use about 1 GB of GPU memory each.
+- Paper PDFs cannot be read on the laptop (no PDF tools). Pipe them to calypso and extract text with pdfminer in the `haris` env; do not store the PDF or its text in the repo.
 
 ## Where things are
 
