@@ -25,9 +25,9 @@ The papers being reimplemented, grouped by problem setting. *Official code* link
 | Method | Paper | Venue | Official code | Status |
 |---|---|---|---|---|
 | [FP](papers/rossi2020-fp/) | On the Unreasonable Effectiveness of Feature Propagation in Learning on Graphs with Missing Node Features | LoG 2022 (arXiv 2021) | [twitter-research/feature-propagation](https://github.com/twitter-research/feature-propagation) | reproduced |
-| [SAT](papers/chen2022-sat/) | Learning on Attribute-Missing Graphs | IEEE TPAMI 2022 | [xuChenSJTU/SAT-master-online](https://github.com/xuChenSJTU/SAT-master-online) | up next |
-| [PCFI](papers/um2023-pcfi/) | Confidence-Based Feature Imputation for Graphs with Partially Known Features | ICLR 2023 | [daehoum1/pcfi](https://github.com/daehoum1/pcfi) | in progress |
-| [FISF](papers/um2025-propinject/) | Propagate and Inject: Revisiting Propagation-Based Feature Imputation for Graphs with Partially Observed Features | ICML 2025 | [daehoum1/fisf](https://github.com/daehoum1/fisf) | up next |
+| [SAT](papers/chen2022-sat/) | Learning on Attribute-Missing Graphs | IEEE TPAMI 2022 | [xuChenSJTU/SAT-master-online](https://github.com/xuChenSJTU/SAT-master-online) | in progress |
+| [PCFI](papers/um2023-pcfi/) | Confidence-Based Feature Imputation for Graphs with Partially Known Features | ICLR 2023 | [daehoum1/pcfi](https://github.com/daehoum1/pcfi) | reproduced |
+| [FISF](papers/um2025-propinject/) | Propagate and Inject: Revisiting Propagation-Based Feature Imputation for Graphs with Partially Observed Features | ICML 2025 | [daehoum1/fisf](https://github.com/daehoum1/fisf) | reproduced |
 <!-- PAPERS:END -->
 
 Candidate papers for later rounds are tracked in [`papers/INDEX.md`](papers/INDEX.md).
