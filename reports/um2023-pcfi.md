@@ -28,7 +28,7 @@ As a check of the setup itself, Feature Propagation run through the same pipelin
 ## What we learned
 
 - **`beta` decides the Amazon results.** With `beta = 1` the second stage (inter-channel correction) is harmful on Photo and Computers at every missing rate: even with only 50% of features missing, v1 reaches 86.8 on Photo where FP and zero-filling reach 91.5. On Computers, and on Photo under structural missingness, the validation search most often picks `beta` of 1e-4 or 1e-6, which effectively switches that stage off, together with a small `alpha` (0.1 to 0.3). On the citation graphs the selected values are spread over the grid and matter much less.
-- **On the citation graphs PCFI's gain over FP comes from the first stage** and is largest under structural missingness (CiteSeer at 99.5%: 64.5 against 61.7 for FP).
+- **On the citation graphs PCFI's gain over FP is largest under structural missingness** (CiteSeer at 99.5%: 64.5 against 61.7 for FP).
 - The paper does not list the selected hyper-parameters, so a reader running the released code with its defaults will not get the paper's Amazon numbers.
 
 Full tables for all rates (v1) are in the [leaderboard](comparisons/leaderboard.md); v2 was run at 99.5% only.
