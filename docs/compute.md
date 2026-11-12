@@ -12,6 +12,8 @@
   setfacl -R -m u:administrator:rwX,d:u:administrator:rwX ~/graph-imputation
   ```
 
+- Because the folder is owned by `jupyter-haris`, `administrator` has `safe.directory` set for it in its global git config (done 2026-11-12). Verified then: write access works, `import gimpute` works in the `haris` env, and the GPU is visible.
+
 - Disk: the root filesystem was ~98% full (15 GB free) on 2026-11-12. Keep datasets small, clean up `runs/`, and ask before downloading anything large.
 
 ## Python environment: `haris`

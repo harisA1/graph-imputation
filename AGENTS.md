@@ -9,7 +9,8 @@ Reimplementing ~63 papers on imputation and learning with missing data on graphs
 ## Current state (keep this section up to date)
 
 - 2026-11-12: skeleton created. No datasets downloaded, no implementations. `gimpute/` holds empty stubs only.
-- Calypso work folder: `~/graph-imputation` under `/home/jupyter-haris` (a clone of this repo).
+- Calypso work folder: `/home/jupyter-haris/graph-imputation` (a clone of this repo), created by Haris and writable by `administrator` via ACL. Verified working 2026-11-12.
+- Next: choose datasets and define the shared protocol in `gimpute/` and `configs/`, then start on the priority-5 papers.
 
 ## Where things are
 
