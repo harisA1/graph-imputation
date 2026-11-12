@@ -48,4 +48,4 @@ The paper tunes the learning rate and dropout of the classifier per setting as w
 
 ## Versions
 
-See [`CHANGELOG.md`](CHANGELOG.md). Current: [`v1`](v1/).
+See [`CHANGELOG.md`](CHANGELOG.md). Versions: [`v1`](v1/) (default settings), [`v2`](v2/) (validation-tuned). Reproduction report: [`reports/um2023-pcfi.md`](../../reports/um2023-pcfi.md).

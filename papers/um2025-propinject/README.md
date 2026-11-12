@@ -50,4 +50,4 @@ OGBN-Arxiv and the link-prediction results are not reproduced here yet.
 
 ## Versions
 
-See [`CHANGELOG.md`](CHANGELOG.md). Current: [`v1`](v1/).
+See [`CHANGELOG.md`](CHANGELOG.md). Versions: [`v1`](v1/) (default settings), [`v2`](v2/) (validation-tuned). Reproduction report: [`reports/um2025-propinject.md`](../../reports/um2025-propinject.md).
