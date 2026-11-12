@@ -13,7 +13,7 @@ Published methods in this area are evaluated on different datasets, missingness 
 
 ## Status
 
-The repository structure, paper catalogue and reproduction-suitability assessment are in place; implementations are being added paper by paper, starting with the propagation-based baselines. See [`reports/reproduction-suitability.md`](reports/reproduction-suitability.md) for the assessment and planned order, and [`reports/log.md`](reports/log.md) for progress.
+The shared evaluation layer, paper catalogue and reproduction-suitability assessment are in place; implementations are being added paper by paper, starting with the propagation-based baselines. See [`reports/reproduction-suitability.md`](reports/reproduction-suitability.md) for the assessment and planned order, and [`reports/log.md`](reports/log.md) for progress.
 
 ## Papers
 
@@ -128,3 +128,14 @@ Datasets (`data/`) and raw run outputs (`runs/`) are not tracked. Paper PDFs are
 ## Contributing
 
 Working conventions (directory layout, versioning rules, status values) are in [`docs/conventions.md`](docs/conventions.md); the compute environment is described in [`docs/compute.md`](docs/compute.md). Automated agents should start with [`AGENTS.md`](AGENTS.md).
+
+## Running
+
+```bash
+python tests/test_smoke.py                                   # check the shared layer (synthetic graph, CPU)
+python -m gimpute.run --paper baseline-mean                  # a reference baseline over the protocol grid
+python -m gimpute.run --paper <slug> --version v1            # a paper version; resumable
+python -m gimpute.report                                     # rebuild reports/comparisons/leaderboard.md
+```
+
+Requires PyTorch and PyYAML; the real datasets are downloaded through PyTorch Geometric on first use.

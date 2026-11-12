@@ -8,10 +8,9 @@ papers/<slug>/
   CHANGELOG.md     # one entry per version: what changed and why
   v1/
     README.md      # how to run this version, deviations from the paper
-    model.py       # method-specific code
-    train.py       # entry point: python -m papers.<slug>.v1.train --config ...
-    configs/       # YAML configs for this version
-    results/       # small result tables (CSV/JSON) that back the reports
+    method.py      # one Method subclass (see gimpute/methods.py); method-specific code only
+    configs/       # method settings (default.yaml), passed to the Method as self.config
+    results/       # results.jsonl appended by the runner; backs the reports
   v2/ ...
 ```
 
@@ -25,18 +24,21 @@ Versions are kept side by side so any reported number can be regenerated.
 - A version is **frozen** once results from it appear in `reports/`. After that, any change that can alter results (model, training, hyper-parameters, data handling) goes into a copy, `vN+1/`, with a `CHANGELOG.md` entry.
 - Pure bug fixes that do not change results, and documentation edits, may go into the existing version.
 - When a version is frozen, tag the commit: `git tag <slug>/vN` and push the tag.
-- Every run writes its git commit hash and full config into its output folder under `runs/`.
+- Every result row records the git commit it was produced with.
 
 ## Shared evaluation protocol
 
-Defined in `gimpute/` and `configs/` (to be written). Every paper should be evaluated on the same:
+Implemented in `gimpute/`; the grid is `configs/protocol.yaml`.
 
-- datasets and splits,
-- missingness mechanisms (e.g. uniform / structural node-attribute masking, missing edges) and rates,
-- seeds (at least 5),
-- metrics (imputation: RMSE/MAE, Recall@k / nDCG@k for binary attributes; downstream: node classification accuracy, clustering ACC/NMI/ARI).
+- A method never sees ground-truth features: it receives the masked features (missing = 0) and the bool mask, and returns imputed features, class scores, or both (`gimpute/methods.py`).
+- Splits and masks depend only on the seed, so every method gets identical splits and identical missing entries.
+- Missingness: `uniform` (each entry missing independently) and `structural` (whole nodes without features).
+- Metrics: RMSE/MAE on missing entries; Recall@k and nDCG@k for binary features under structural missingness; node classification accuracy, using the method's own classifier if it has one and otherwise the standard GCN (`gimpute/downstream.py`) on its imputed features.
+- Run a version: `python -m gimpute.run --paper <slug> --version vN` (resumable; one row per cell in `papers/<slug>/vN/results/results.jsonl`, with the git commit). Queue several: `python -m gimpute.queue add ...` then `python -m gimpute.queue work`.
+- `python -m gimpute.report` rebuilds `reports/comparisons/leaderboard.md` from all results.
+- `python tests/test_smoke.py` checks the shared layer on a synthetic graph; run it after changing `gimpute/`.
 
-Paper-specific protocols are allowed **in addition**, to check that we match the paper's own numbers.
+Paper-specific protocols are allowed **in addition** (as extra code in the version folder), to check that we match the paper's own numbers before comparing under the shared protocol.
 
 ## Status values (`papers.csv`)
 

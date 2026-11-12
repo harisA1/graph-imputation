@@ -8,10 +8,11 @@ Reimplementing ~63 papers on imputation and learning with missing data on graphs
 
 ## Current state (keep this section up to date)
 
-- 2026-11-12: skeleton created. No datasets downloaded, no implementations. `gimpute/` holds empty stubs only.
-- Calypso work folder: `/home/jupyter-haris/graph-imputation` (a clone of this repo), created by Haris and writable by `administrator` via ACL. Verified working 2026-11-12.
-- 2026-11-12: every paper assessed for reproduction suitability, see [`reports/reproduction-suitability.md`](reports/reproduction-suitability.md) and the `code_url` / `open_data` / `repro_tier` columns in `papers.csv`. Official code exists for 35 of 63; start with the tier-1 papers.
-- Next: choose datasets and define the shared protocol in `gimpute/` and `configs/`, then start on the priority-5 papers.
+- 2026-11-12: skeleton created; calypso work folder `/home/jupyter-haris/graph-imputation` (a clone of this repo) created by Haris and writable by `administrator` via ACL.
+- 2026-11-12: every paper assessed for reproduction suitability, see [`reports/reproduction-suitability.md`](reports/reproduction-suitability.md) and the `venue` / `code_url` / `open_data` / `repro_tier` columns in `papers.csv`. Official code exists for 35 of 63.
+- 2026-11-12: shared layer written and tested on calypso with the synthetic graph and the three reference baselines (`python tests/test_smoke.py`; runner, resume, queue and leaderboard all exercised). **No paper implemented yet and no real dataset downloaded yet**: real datasets need `torch_geometric`, which is not installed in the `haris` env until Haris agrees.
+- Next: install `torch_geometric`, run the baselines on the protocol grid, then implement **Feature Propagation (`rossi2020-fp`)** as the first paper, followed by PCFI and Propagate-and-Inject, then SAT.
+- The laptop has no Python. Run scripts (`scripts/build_index.py`, tests, experiments) in the calypso clone. `administrator` cannot push from calypso, so copy generated files back to the laptop clone and commit there.
 
 ## Where things are
 
@@ -35,8 +36,9 @@ Reimplementing ~63 papers on imputation and learning with missing data on graphs
 
 ## How to start a paper
 
-1. Read the paper (PDF in `SELECTED/`, filename in `papers.csv`) and the paper's `README.md`.
-2. Copy `papers/_template/v1/` into `papers/<slug>/v1/`.
-3. Fill in the method summary and the paper's reported numbers in `papers/<slug>/README.md` before writing code.
-4. Implement against `gimpute` interfaces; run on calypso; write `reports/<slug>.md`.
-5. Set `status` in `papers.csv` (`not-started` → `in-progress` → `reproduced` / `partial` / `failed`), rebuild the index, commit, push.
+1. Read the paper (PDF in `SELECTED/`, filename in `papers.csv`), the paper's `README.md`, and the official code if `code_url` is set.
+2. Fill in the method summary and the paper's reported numbers in `papers/<slug>/README.md` before writing code.
+3. Copy `papers/_template/v1/` into `papers/<slug>/v1/` and implement one `Method` subclass in `method.py` (interface: `gimpute/methods.py`; examples: `gimpute/baselines.py`). Put anything reusable by other papers into `gimpute/`.
+4. On calypso: `python -m gimpute.run --paper <slug> --version v1 --datasets cora --seeds 0` to check, then queue the full grid with `python -m gimpute.queue add --paper <slug> --version v1` and `python -m gimpute.queue work`.
+5. First match the paper's own numbers under the paper's own setting (document how in the version README), then report the shared-protocol numbers. Write `reports/<slug>.md` and run `python -m gimpute.report`.
+6. Set `status` in `papers.csv` (`not-started` → `in-progress` → `reproduced` / `partial` / `failed`), run `scripts/build_index.py`, add a `CHANGELOG.md` entry, commit, push, tag `<slug>/v1` when frozen.
