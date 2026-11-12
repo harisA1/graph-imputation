@@ -6,8 +6,8 @@
 | Year | 2020 |
 | Category | D - general data imputation |
 | Priority | 4 |
-| Venue | TODO |
-| Official code | TODO (link, or "none found") |
+| Venue | ICML 2020 |
+| Official code | https://github.com/BorisMuzellec/MissingDataOT |
 | PDF (private, not in repo) | `SELECTED/Muzellec 2020 - ΟΤ - Missing data imputation using optimal transport -- R SEE++++.pdf` |
 
 Status is tracked in [`papers/papers.csv`](../papers.csv).
@@ -23,6 +23,13 @@ TODO: the core idea in a few sentences, key equations with page references, trai
 ## Reported results (from the paper)
 
 TODO: datasets, missing mechanism and rates, metrics, and the numbers to reproduce (table/figure and page).
+
+## Reproduction suitability (assessed 2026-11-12)
+
+- Tier: **1 - start here** (see [`reports/reproduction-suitability.md`](../../reports/reproduction-suitability.md))
+- Datasets in the paper: 23 UCI tabular sets
+- Open data: yes
+- Notes: Official code (108 stars), tiny data. Needed anyway as the OT baseline behind GRIOT.
 
 ## Versions
 
