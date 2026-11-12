@@ -1,0 +1,7 @@
+# The shared evaluation protocol. Every paper is run on this grid unless overridden on the
+# command line (see `python -m gimpute.run --help`). Changing this file changes what the
+# leaderboard compares, so change it deliberately and note it in reports/log.md.
+datasets: [cora, citeseer, pubmed, photo, computers]
+mechanisms: [uniform, structural]
+rates: [0.5, 0.9, 0.99]
+seeds: [0, 1, 2, 3, 4]

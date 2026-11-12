@@ -1,5 +1,3 @@
 # Shared configs
 
-Shared experiment definitions used by every paper: dataset list, missingness mechanisms and rates, seeds. Paper-specific configs live in `papers/<slug>/vN/configs/`.
-
-Nothing defined yet.
+`protocol.yaml` defines the grid every paper is evaluated on: datasets, missingness mechanisms, missing rates and seeds. Paper-specific settings live in `papers/<slug>/vN/configs/`.

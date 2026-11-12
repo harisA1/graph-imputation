@@ -1,10 +1,12 @@
 # v1
 
-How to run (from the repo root, on calypso, see docs/compute.md):
+Run from the repo root (on calypso, see docs/compute.md):
 
 ```bash
-python -m papers.<slug>.v1.train --config papers/<slug>/v1/configs/default.yaml
+python -m gimpute.run --paper <slug> --version v1
 ```
+
+Results are appended to `results/results.jsonl` in this folder; `python -m gimpute.report` rebuilds the leaderboard.
 
 ## Deviations from the paper
 
