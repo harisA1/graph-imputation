@@ -60,3 +60,7 @@ python -m gimpute.report                                     # rebuild reports/c
 ```
 
 Requires PyTorch and PyYAML; the real datasets are downloaded through PyTorch Geometric on first use.
+
+## License
+
+[MIT](LICENSE). Each reimplemented method remains the work of its original authors; please cite the original papers.
