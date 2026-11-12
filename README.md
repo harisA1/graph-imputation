@@ -17,7 +17,7 @@ The shared evaluation layer, paper catalogue and reproduction-suitability assess
 
 ## Papers
 
-63 papers, grouped by problem setting. *Official code* links to the authors' repository where one was found. *Status* refers to the reimplementation in this repository.
+The papers being reimplemented, grouped by problem setting. *Official code* links to the authors' repository. *Status* refers to the reimplementation in this repository. The list grows as papers are taken on.
 
 <!-- PAPERS:START -->
 ### Graphs with missing node attributes
@@ -109,7 +109,7 @@ The shared evaluation layer, paper catalogue and reproduction-suitability assess
 | [FairAC](papers/guo2023-fairac/) | Fair Attribute Completion on Graph with Missing Attributes | ICLR 2023 | [donglgcn/FairAC](https://github.com/donglgcn/FairAC) | planned |
 <!-- PAPERS:END -->
 
-A sortable version with reproduction tiers is in [`papers/INDEX.md`](papers/INDEX.md).
+Candidate papers for later rounds are tracked in [`papers/INDEX.md`](papers/INDEX.md).
 
 ## Repository layout
 

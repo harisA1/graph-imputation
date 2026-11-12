@@ -16,6 +16,7 @@ CATEGORIES = {
     "E": "Fairness with missing attributes",
 }
 STATUS = {
+    "next": "up next",
     "not-started": "planned",
     "in-progress": "in progress",
     "reproduced": "reproduced",
@@ -71,7 +72,10 @@ def build_index(rows: list) -> str:
 def build_readme_tables(rows: list) -> str:
     lines = []
     for code, cat in CATEGORIES.items():
-        group = sorted((r for r in rows if r["category"] == code), key=lambda r: (r["year"], r["slug"]))
+        group = sorted(
+            (r for r in rows if r["category"] == code and r["status"] not in ("not-started", "skipped")),
+            key=lambda r: (r["year"], r["slug"]),
+        )
         if not group:
             continue
         lines += [

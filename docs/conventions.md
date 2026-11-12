@@ -42,7 +42,7 @@ Paper-specific protocols are allowed **in addition** (as extra code in the versi
 
 ## Status values (`papers.csv`)
 
-`not-started`, `in-progress`, `reproduced` (within reported variance), `partial` (runs, numbers off), `failed`, `skipped`.
+`not-started` (candidate, not shown in the README), `next` (committed, up next), `in-progress`, `reproduced` (within reported variance), `partial` (runs, numbers off), `failed`, `skipped`.
 
 ## Priority (`papers.csv`)
 
